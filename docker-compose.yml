@@ -1,0 +1,18 @@
+---
+db:
+  image: mariadb:10
+  #volumes:
+  #  - ./.docker/db:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: onlyforadmin
+    MYSQL_DATABASE: nextcloud
+    MYSQL_USER: nextcloud
+    MYSQL_PASSWORD: rosebud
+web:
+  image: lazyfrosch/nextcloud
+  links:
+    - db
+  volumes:
+    - ./.docker/web:/var/www/html
+  ports:
+    - 8080:80
